@@ -10,18 +10,7 @@
 </head>
 
 <body>
-    <a href="{{ route('items.create') }}">Create new item</a>
-    <h1>Items:</h1>
-    <?php foreach ($items as $item) { ?>
-    <a href="{{ route('items.show', $item->id) }}">
-        <div>
-            <h2>{{ $item['name'] }}</h2>
-            <p>{{ $item['entries'] }}</p>
-        </div>
-    </a>
-
-
-    <?php } ?>
+    {{ $item }}
 </body>
 
 </html>
