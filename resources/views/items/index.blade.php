@@ -1,27 +1,20 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-
-<body>
-    <a href="{{ route('items.create') }}">Create new item</a>
+<x-app-layout>
+    @auth
+        <a href="{{ route('items.create') }}">Create new item</a>
+    @endauth
     <h1>Items:</h1>
-    <?php foreach ($items as $item) { ?>
-    <a href="{{ route('items.show', $item->id) }}">
-        <div>
-            <h2>{{ $item['name'] }}</h2>
-            <p>{{ $item['entries'] }}</p>
+    <div class="flex flex-wrap mb-4 mx-2 justify-evenly">
+        <?php foreach ($items as $item) { ?>
+        <div class="max-w-sm mb-4 mx-2 w-60 rounded overflow-hidden shadow-lg">
+            <a href="{{ route('items.show', $item->id) }}">
+                <img class="w-60 max-h-60"
+                    src="@if ($item->image === null) {{ asset('storage/' . $item->type->image) }}
+                    @else {{ asset('storage/' . $item->image) }} @endif"
+                    alt="{{ $item->name }}">
+                <h2 class="font-bold text-xl mb-2" style="color:{{ $item->rarity->color }}">{{ $item->name }}</h2>
+                <div>{{ $item->source->name }}</div>
+            </a>
         </div>
-    </a>
-
-
-    <?php } ?>
-</body>
-
-</html>
+        <?php } ?>
+    </div>
+</x-app-layout>

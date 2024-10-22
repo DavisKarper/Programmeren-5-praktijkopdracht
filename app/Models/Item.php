@@ -12,4 +12,16 @@ class Item extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function rarity()
+    {
+        return $this->belongsTo(Rarity::class);
+    }
+    public function source()
+    {
+        return $this->belongsTo(Source::class);
+    }
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
 }

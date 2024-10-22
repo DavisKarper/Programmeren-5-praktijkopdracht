@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Item;
 use App\Models\Rarity;
+use App\Models\Source;
 use App\Models\Type;
 use Illuminate\Http\Request;
 
@@ -16,8 +17,10 @@ class ItemController extends Controller
     public function index()
     {
         $items = Item::all();
-        // return ($item);
-        return view('items.index', ['items' => $items]);
+        $rarities = Rarity::all();
+        $types = Type::all();
+        $sources = Source::all();
+        return view('items.index', ['items' => $items, 'rarities' => $rarities, 'types' => $types, 'sources' => $sources]);
     }
 
     /**
@@ -40,18 +43,19 @@ class ItemController extends Controller
         //     'entries' => 'required|string',
         //     'type_id' => 'required|integer',
         //     'rarity_id' => 'required|integer',
-        //     'image' => 'nullable|image',
-        //     'reqAttune' => 'nullable|string|max:255',
-        //     'weight' => 'nullable|numeric|min:0',
         // ]);
         $item = new Item();
 
-        $nameOfFile = $request->file('image')->storePublicly('images', 'public');
+        if ($request->has('image')) {
+            $nameOfFile = $request->file('image')->storePublicly('images', 'public');
+            $item->image = $nameOfFile;
+        }
+
 
         $item->name = $request->input('name');
         $item->entries = $request->input('entries');
-        $item->image = $nameOfFile;
-        $item->reqAttune = $request->input('reqAttune');
+
+        $item->reqAttune = $request->input('attuneDetails');
         $item->weight = $request->input('weight');
 
         $item->type_id = $request->input('type');

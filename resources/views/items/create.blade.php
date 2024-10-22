@@ -37,7 +37,8 @@
         <div>
             <x-input-label for="reqAttune">Attunement (leave empty if the item doesn't require
                 attunement)</x-input-label>
-            <input type="text" id="reqAttune" name="reqAttune">
+            <input type="checkbox" id="reqAttune" name="reqAttune">
+            <input type="text" id="attuneDetails" name="attuneDetails">
         </div>
         <div>
             <x-input-label for="weight">Weight (leave empty if the item doesn't have a weight)</x-input-label>
