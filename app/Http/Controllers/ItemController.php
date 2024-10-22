@@ -30,12 +30,16 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required',
+            'entries' => 'required'
+        ]);
         $item = new Item();
 
         $item->name = $request->input('name');
         $item->entries = $request->input('entries');
         $item->source_id = 0;
-        // $item->user_id = auth()->user()->id;
+        $item->user_id = auth()->id;
 
         $item->save();
 
