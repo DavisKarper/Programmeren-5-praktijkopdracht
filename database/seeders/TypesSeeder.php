@@ -14,16 +14,44 @@ class TypesSeeder extends Seeder
     public function run(): void
     {
         $magicItemTypes = [
-            ['name' => 'Armor'],
-            ['name' => 'Potion'],
-            ['name' => 'Ring'],
-            ['name' => 'Rod'],
-            ['name' => 'Scroll'],
-            ['name' => 'Staff'],
-            ['name' => 'Wand'],
-            ['name' => 'Weapon'],
-            ['name' => 'Wondrous Item'],
+            [
+                'name' => 'Armor',
+                'image' => 'images/armor.jpg'
+            ],
+            [
+                'name' => 'Potion',
+                'image' => 'images/potion.jpg'
+            ],
+            [
+                'name' => 'Ring',
+                'image' => 'images/ring.jpg'
+            ],
+            [
+                'name' => 'Rod',
+                'image' => 'images/rod.jpg'
+            ],
+            [
+                'name' => 'Scroll',
+                'image' => 'images/scroll.jpg'
+            ],
+            [
+                'name' => 'Staff',
+                'image' => 'images/staff.jpg'
+            ],
+            [
+                'name' => 'Wand',
+                'image' => 'images/wand.jpg'
+            ],
+            [
+                'name' => 'Weapon',
+                'image' => 'images/weapon.jpg'
+            ],
+            [
+                'name' => 'Wondrous Item',
+                'image' => 'images/wondrous-item.jpg'
+            ]
         ];
+
 
         foreach ($magicItemTypes as $magicItemType) {
             Type::create($magicItemType);

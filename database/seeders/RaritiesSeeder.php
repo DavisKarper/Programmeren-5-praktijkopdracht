@@ -14,12 +14,30 @@ class RaritiesSeeder extends Seeder
     public function run(): void
     {
         $rarities = [
-            ['name' => 'Common'],
-            ['name' => 'Uncommon'],
-            ['name' => 'Rare'],
-            ['name' => 'Very Rare'],
-            ['name' => 'Legendary'],
-            ['name' => 'Artifact']
+            [
+                'name' => 'Common',
+                'color' => '#000000'
+            ],
+            [
+                'name' => 'Uncommon',
+                'color' => '#00FF00'
+            ],
+            [
+                'name' => 'Rare',
+                'color' => '#0000FF'
+            ],
+            [
+                'name' => 'Very Rare',
+                'color' => '#800080'
+            ],
+            [
+                'name' => 'Legendary',
+                'color' => '#FFD700'
+            ],
+            [
+                'name' => 'Artifact',
+                'color' => '#B22222'
+            ]
         ];
 
         foreach ($rarities as $rarity) {

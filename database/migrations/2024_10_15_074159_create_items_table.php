@@ -14,15 +14,16 @@ return new class extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name', 75);
+            $table->string('name', 255);
             $table->text('entries');
-            $table->integer('source_id');
             $table->integer('page')->nullable();
-            $table->integer('rarity_id');
-            $table->string('reqAttune', 100)->nullable();
+            $table->string('reqAttune', 255)->nullable();
             $table->integer('weight')->nullable();
+
+            $table->foreignId('type_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('source_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('rarity_id')->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->integer('type_id');
 
             $table->timestamps();
         });

@@ -19,5 +19,14 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+        $this->call([
+            RaritiesSeeder::class
+        ]);
+        $this->call([
+            SourcesSeeder::class
+        ]);
+        $this->call([
+            TypesSeeder::class
+        ]);
     }
 }

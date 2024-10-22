@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\Rarity;
+use App\Models\Type;
 use Illuminate\Http\Request;
+
 
 class ItemController extends Controller
 {
@@ -22,7 +25,9 @@ class ItemController extends Controller
      */
     public function create()
     {
-        return view('items.create');
+        $rarities = Rarity::all();
+        $types = Type::all();
+        return view('items.create', ['rarities' => $rarities, 'types' => $types]);
     }
 
     /**
@@ -30,16 +35,30 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'entries' => 'required'
-        ]);
+        // $request->validate([
+        //     'name' => 'required|string|max:255',
+        //     'entries' => 'required|string',
+        //     'type_id' => 'required|integer',
+        //     'rarity_id' => 'required|integer',
+        //     'image' => 'nullable|image',
+        //     'reqAttune' => 'nullable|string|max:255',
+        //     'weight' => 'nullable|numeric|min:0',
+        // ]);
         $item = new Item();
+
+        $nameOfFile = $request->file('image')->storePublicly('images', 'public');
 
         $item->name = $request->input('name');
         $item->entries = $request->input('entries');
-        $item->source_id = 0;
-        $item->user_id = auth()->id;
+        $item->image = $nameOfFile;
+        $item->reqAttune = $request->input('reqAttune');
+        $item->weight = $request->input('weight');
+
+        $item->type_id = $request->input('type');
+        $item->source_id = 1;
+        $item->rarity_id = $request->input('rarity');
+        $item->user_id = $request->user()->id;
+
 
         $item->save();
 
