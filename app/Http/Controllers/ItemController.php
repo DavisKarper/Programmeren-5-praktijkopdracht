@@ -62,6 +62,8 @@ class ItemController extends Controller
         $item->source_id = 1;
         $item->rarity_id = $request->input('rarity');
         $item->user_id = $request->user()->id;
+        $item->verified = 0;
+
 
 
         $item->save();
