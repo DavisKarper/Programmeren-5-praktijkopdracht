@@ -14,12 +14,23 @@ class ItemController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $items = Item::all();
         $rarities = Rarity::all();
         $types = Type::all();
         $sources = Source::all();
+
+        // $items = Item::all();
+        $itemQuery = Item::query();
+
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $itemQuery->where('name', 'like', '%' . $search . '%')
+                ->orWhere('entries', 'like', '%' . $search . '%');
+        }
+
+        $items = $itemQuery->get();
+
         return view('items.index', ['items' => $items, 'rarities' => $rarities, 'types' => $types, 'sources' => $sources]);
     }
 
