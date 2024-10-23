@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('items', function (Blueprint $table) {
-            $table->boolean('verified')->after('weight');
+            $table->boolean('verified')->default(false)->after('weight');
         });
     }
 

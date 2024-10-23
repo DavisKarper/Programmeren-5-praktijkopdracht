@@ -16,6 +16,11 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('items.index')" :active="request()->routeIs('items.index')">
+                        {{ __('Items') }}
+                    </x-nav-link>
+                </div>
             </div>
             <!-- Settings Dropdown -->
             @auth
@@ -55,6 +60,18 @@
                         </x-slot>
                     </x-dropdown>
                 </div>
+            @else
+                <a href="{{ route('login') }}"
+                    class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                    Log in
+                </a>
+
+                @if (Route::has('register'))
+                    <a href="{{ route('register') }}"
+                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                        Register
+                    </a>
+                @endif
             @endauth
 
             <!-- Hamburger -->
@@ -107,6 +124,5 @@
                 </div>
             </div>
         @endauth
-
     </div>
 </nav>

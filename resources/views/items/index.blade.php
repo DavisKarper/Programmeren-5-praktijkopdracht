@@ -11,8 +11,11 @@
                     src="@if ($item->image === null) {{ asset('storage/' . $item->type->image) }}
                     @else {{ asset('storage/' . $item->image) }} @endif"
                     alt="{{ $item->name }}">
-                <h2 class="font-bold text-xl mb-2" style="color:{{ $item->rarity->color }}">{{ $item->name }}</h2>
-                <div>{{ $item->source->name }}</div>
+                <div class="p-3">
+                    <h2 class="font-bold mb-2 text-2xl  tracking-tight" style="color:{{ $item->rarity->color }}">
+                        {{ $item->name }}</h2>
+                    <div>{{ $item->source->name }}</div>
+                </div>
             </a>
         </div>
         <?php } ?>
