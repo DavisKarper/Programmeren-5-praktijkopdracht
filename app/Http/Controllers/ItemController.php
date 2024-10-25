@@ -22,16 +22,18 @@ class ItemController extends Controller
 
         // $items = Item::all();
         $itemQuery = Item::query();
+        $itemQuery->where('verified', true);
 
         if ($request->filled('search')) {
             $search = $request->input('search');
-            $itemQuery->where('name', 'like', '%' . $search . '%')
-                ->orWhere('entries', 'like', '%' . $search . '%');
+            $itemQuery->whereAny(['name', 'entries'], 'like', '%' . $search . '%');
         }
 
         $items = $itemQuery->get();
 
-        return view('items.index', ['items' => $items, 'rarities' => $rarities, 'types' => $types, 'sources' => $sources]);
+        $previousSearch = $request;
+
+        return view('items.index', ['items' => $items, 'rarities' => $rarities, 'types' => $types, 'sources' => $sources, 'previousSearch' => $previousSearch]);
     }
 
     /**
