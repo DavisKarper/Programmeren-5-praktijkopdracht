@@ -29,6 +29,8 @@ class ItemController extends Controller
             $itemQuery->whereAny(['name', 'entries'], 'like', '%' . $search . '%');
         }
 
+        $itemQuery->orderBy('id', 'DESC');
+
         $items = $itemQuery->get();
 
         $previousSearch = $request;

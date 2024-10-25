@@ -16,7 +16,7 @@ class RaritiesSeeder extends Seeder
         $rarities = [
             [
                 'name' => 'Common',
-                'color' => '#666666'
+                'color' => '#474747'
             ],
             [
                 'name' => 'Uncommon',
