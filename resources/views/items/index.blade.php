@@ -1,8 +1,7 @@
 <x-app-layout>
-    @auth
+    @if (Auth::user()->verified == 1)
         <a href="{{ route('items.create') }}">Create new item</a>
-    @endauth
-
+    @endif
 
     <form class="max-w-md mx-auto">
         @csrf

@@ -15,8 +15,8 @@ class UsersSeeder extends Seeder
     {
         $users = [
             [
-                'name' => 'Tester',
-                'email' => 'test@test.com',
+                'name' => 'Admin',
+                'email' => 'admin@admin.com',
                 'email_verified_at' => '2024-10-25 11:32:11',
                 'password' => '$2y$12$5uKocBajtPTCI29BPe38C.oYCC14/oDrTgoSOKwb16Y3u3roeghbm',
                 'remember_token' => null,
@@ -24,6 +24,17 @@ class UsersSeeder extends Seeder
                 'updated_at' => '2024-10-25 11:32:11',
                 'verified' => 1,
                 'admin' => 1
+            ],
+            [
+                'name' => 'Tester',
+                'email' => 'test@test.com',
+                'email_verified_at' => '2024-10-25 11:32:11',
+                'password' => '$2y$12$5uKocBajtPTCI29BPe38C.oYCC14/oDrTgoSOKwb16Y3u3roeghbm',
+                'remember_token' => null,
+                'created_at' => '2024-10-25 11:32:11',
+                'updated_at' => '2024-10-25 11:32:11',
+                'verified' => 0,
+                'admin' => 0
             ],
         ];
         foreach ($users as $user) {
