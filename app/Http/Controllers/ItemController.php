@@ -54,8 +54,8 @@ class ItemController extends Controller
         // $request->validate([
         //     'name' => 'required|string|max:255',
         //     'entries' => 'required|string',
-        //     'type_id' => 'required|integer',
-        //     'rarity_id' => 'required|integer',
+        //     'type_id' => 'required',
+        //     'rarity_id' => 'required',
         // ]);
         $item = new Item();
 

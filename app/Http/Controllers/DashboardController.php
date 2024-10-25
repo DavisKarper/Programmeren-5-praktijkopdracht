@@ -4,11 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+
+use App\Models\Item;
+use App\Models\Rarity;
+use App\Models\Source;
+use App\Models\Type;
+
 
 class DashboardController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Goes to the dashboard suitable for the user
      */
     public function index(Request $request)
     {
@@ -16,6 +23,20 @@ class DashboardController extends Controller
             return view('admin.dashboard');
         } else {
             return view('user.dashboard');
+        };
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function adminCreateItem(Request $request)
+    {
+        if (Auth::user()->admin == 1) {
+            $rarities = Rarity::all();
+            $types = Type::all();
+            return view('admin.create-item', ['rarities' => $rarities, 'types' => $types]);
+        } else {
+            return Redirect::route('dashboard');
         };
     }
 }

@@ -1,8 +1,4 @@
 <x-app-layout>
-    @if (Auth::user()->verified == 1)
-        <a href="{{ route('items.create') }}">Create new item</a>
-    @endif
-
     <form class="max-w-md mx-auto">
         @csrf
         <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
