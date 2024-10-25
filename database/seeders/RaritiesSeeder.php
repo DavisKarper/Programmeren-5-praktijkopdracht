@@ -16,28 +16,28 @@ class RaritiesSeeder extends Seeder
         $rarities = [
             [
                 'name' => 'Common',
-                'color' => '#000000'
+                'color' => '#666666'
             ],
             [
                 'name' => 'Uncommon',
-                'color' => '#00FF00'
+                'color' => '#1F9400'
             ],
             [
                 'name' => 'Rare',
-                'color' => '#0000FF'
+                'color' => '#0070DD'
             ],
             [
                 'name' => 'Very Rare',
-                'color' => '#800080'
+                'color' => '#A335EE'
             ],
             [
                 'name' => 'Legendary',
-                'color' => '#FFD700'
+                'color' => '#FF8000'
             ],
             [
                 'name' => 'Artifact',
                 'color' => '#B22222'
-            ]
+            ],
         ];
 
         foreach ($rarities as $rarity) {
