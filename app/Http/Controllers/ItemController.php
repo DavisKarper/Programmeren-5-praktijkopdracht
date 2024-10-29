@@ -20,13 +20,30 @@ class ItemController extends Controller
         $types = Type::all();
         $sources = Source::all();
 
-        // $items = Item::all();
         $itemQuery = Item::query();
         $itemQuery->where('verified', true);
 
+        $chosenTypes = $request->input('types', []);
+        if (!empty($chosenTypes)) {
+            $itemQuery->whereIn('type_id', $chosenTypes);
+        }
+
+        $chosenRarities = $request->input('rarities', []);
+        if (!empty($chosenRarities)) {
+            $itemQuery->whereIn('rarity_id', $chosenRarities);
+        }
+
+        $chosenSources = $request->input('sources', []);
+        if (!empty($chosenSources)) {
+            $itemQuery->whereIn('source_id', $chosenSources);
+        }
+
         if ($request->filled('search')) {
             $search = $request->input('search');
-            $itemQuery->whereAny(['name', 'entries'], 'like', '%' . $search . '%');
+            $itemQuery->where(function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('entries', 'like', '%' . $search . '%');
+            });
         }
 
         $itemQuery->orderBy('id', 'DESC');

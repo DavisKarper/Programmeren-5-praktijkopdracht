@@ -4,6 +4,9 @@
 - validatie opnieuw toegevoegd bij het maken van een item
 - tags tabel en koppeltabel toegevoegd
 - dropdown checkbox voor rarities ingevuld
+- flowbite geïnstalleerd
+- dropdown checkbox voor sources en types ingevuld
+- dropdown search functie werkend gekregen voor zoeken op specifieke types, rarities en sources
 
 ### 26-10-2024
 - create item aangemaakt voor admin (omdat die meer kan toevoegen dan alleen homebrew)

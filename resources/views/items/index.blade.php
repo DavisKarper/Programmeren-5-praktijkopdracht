@@ -1,32 +1,87 @@
 <x-app-layout>
     <form class="w-full flex my-3">
         @csrf
-        <div class="flex-1 w-30">
-            <button id="dropdownBgHoverButton" data-dropdown-toggle="dropdownBgHover"
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                type="button">Rarities <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                    fill="none" viewBox="0 0 10 6">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="m1 1 4 4 4-4" />
-                </svg>
-            </button>
-            <div id="dropdownBgHover" class="z-10 hidden w-48 bg-white rounded-lg shadow dark:bg-gray-700">
-                <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200"
-                    aria-labelledby="dropdownBgHoverButton">
-                    @foreach ($rarities as $rarity)
-                        <li>
-                            <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                <input id="rarity[{{ $rarity->id }}]" type="checkbox" value="{{ $rarity->id }}"
-                                    name="rarities[]"
-                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                <label for="rarity[{{ $rarity->id }}]"
-                                    class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">{{ $rarity->name }}</label>
-                            </div>
-                        </li>
-                    @endforeach
-                </ul>
+
+        <div class="flex-1 w-30 flex gap-4 mx-4">
+            <div>
+                <button id="RaritiesButton" data-dropdown-toggle="Rarities"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    type="button">Rarities <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 4 4 4-4" />
+                    </svg>
+                </button>
+                <div id="Rarities" class="z-10 hidden w-48 bg-white rounded-lg shadow dark:bg-gray-700">
+                    <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="RaritiesButton">
+                        @foreach ($rarities as $rarity)
+                            <li>
+                                <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                    <input id="rarity[{{ $rarity->id }}]" type="checkbox" value="{{ $rarity->id }}"
+                                        name="rarities[]"
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                    <label for="rarity[{{ $rarity->id }}]"
+                                        class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">{{ $rarity->name }}</label>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <button id="TypesButton" data-dropdown-toggle="Types"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    type="button">Types <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 4 4 4-4" />
+                    </svg>
+                </button>
+                <div id="Types" class="z-10 hidden w-48 bg-white rounded-lg shadow dark:bg-gray-700">
+                    <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="TypesButton">
+                        @foreach ($types as $type)
+                            <li>
+                                <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                    <input id="type[{{ $type->id }}]" type="checkbox" value="{{ $type->id }}"
+                                        name="types[]"
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                    <label for="type[{{ $type->id }}]"
+                                        class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">{{ $type->name }}</label>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+
+            <div>
+                <button id="SourcesButton" data-dropdown-toggle="Sources"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    type="button">Sources <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 4 4 4-4" />
+                    </svg>
+                </button>
+                <div id="Sources" class="z-10 hidden w-70 bg-white rounded-lg shadow dark:bg-gray-700">
+                    <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="SourcesButton">
+                        @foreach ($sources as $source)
+                            <li>
+                                <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                    <input id="source[{{ $source->id }}]" type="checkbox" value="{{ $source->id }}"
+                                        name="sources[]"
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                    <label for="source[{{ $source->id }}]"
+                                        class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">{{ $source->name }}</label>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
         </div>
+
+
 
         <div class="flex flex-1 w-40">
             <button id="dropdown-button" data-dropdown-toggle="dropdown"
@@ -76,7 +131,6 @@
         </div>
 
     </form>
-
 
     <div class="flex flex-wrap mb-4 mx-2 justify-evenly">
         <?php foreach ($items as $item) { ?>
