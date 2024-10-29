@@ -53,12 +53,12 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'name' => 'required|string|max:255',
-        //     'entries' => 'required|string',
-        //     'type_id' => 'required',
-        //     'rarity_id' => 'required',
-        // ]);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'entries' => 'required|string',
+            'type' => 'required|integer',
+            'rarity' => 'required|integer',
+        ]);
         $item = new Item();
 
         if ($request->has('image')) {

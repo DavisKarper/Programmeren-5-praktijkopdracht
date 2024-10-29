@@ -1,6 +1,10 @@
 # Changelog
 
 ### 26-10-2024
+- validatie opnieuw toegevoegd bij het maken van een item
+- tags tabel en koppeltabel toegevoegd
+
+### 26-10-2024
 - create item aangemaakt voor admin (omdat die meer kan toevoegen dan alleen homebrew)
 - kleuren verbeterd van de rarities
 - sort by menu toegevoegd (alleen het menu, geen functionalitiet nog)
