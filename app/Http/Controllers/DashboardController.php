@@ -19,10 +19,13 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
+        $userid = $request->user()->id;
+        $usersItems = Item::query()->where('user_id', $userid)->get();
+
         if (Auth::user()->admin == 1) {
-            return view('admin.dashboard');
+            return view('admin.dashboard', ['usersItems' => $usersItems]);
         } else {
-            return view('user.dashboard');
+            return view('user.dashboard', ['usersItems' => $usersItems]);
         };
     }
 

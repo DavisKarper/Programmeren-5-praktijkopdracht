@@ -45,8 +45,16 @@ class ItemController extends Controller
                     ->orWhere('entries', 'like', '%' . $search . '%');
             });
         }
+        if ($request->input('orderBy') === 'newest') {
+            $itemQuery->orderBy('id', 'DESC');
+        } elseif ($request->input('orderBy') === 'oldest') {
+            $itemQuery->orderBy('id', 'ASC');
+        } elseif ($request->input('orderBy') === 'aFirst') {
+            $itemQuery->orderBy('name', 'ASC');
+        } elseif ($request->input('orderBy') === 'zFirst') {
+            $itemQuery->orderBy('name', 'DESC');
+        }
 
-        $itemQuery->orderBy('id', 'DESC');
 
         $items = $itemQuery->get();
 

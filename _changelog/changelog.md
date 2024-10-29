@@ -7,6 +7,7 @@
 - flowbite geïnstalleerd
 - dropdown checkbox voor sources en types ingevuld
 - dropdown search functie werkend gekregen voor zoeken op specifieke types, rarities en sources
+- sorteerfunctie toegevoegd naast searchbar
 
 ### 26-10-2024
 - create item aangemaakt voor admin (omdat die meer kan toevoegen dan alleen homebrew)
