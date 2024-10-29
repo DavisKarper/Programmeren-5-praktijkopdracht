@@ -3,6 +3,7 @@
 ### 26-10-2024
 - validatie opnieuw toegevoegd bij het maken van een item
 - tags tabel en koppeltabel toegevoegd
+- dropdown checkbox voor rarities ingevuld
 
 ### 26-10-2024
 - create item aangemaakt voor admin (omdat die meer kan toevoegen dan alleen homebrew)
