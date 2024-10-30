@@ -141,7 +141,15 @@ class ItemController extends Controller
      */
     public function edit(item $item)
     {
-        //
+        $rarities = Rarity::all();
+        $types = Type::all();
+        $sources = [];
+
+        if (Auth::user()->admin == 1) {
+            $sources = Source::all();
+        }
+
+        return view('items.edit', ['item' => $item, 'rarities' => $rarities, 'types' => $types, 'sources' => $sources]);
     }
 
     /**
@@ -149,7 +157,43 @@ class ItemController extends Controller
      */
     public function update(Request $request, item $item)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'entries' => 'required|string',
+            'type' => 'required|integer',
+            'rarity' => 'required|integer',
+        ]);
+
+        if ($request->has('image')) {
+            $nameOfFile = $request->file('image')->storePublicly('images', 'public');
+            $item->image = $nameOfFile;
+        }
+
+        $item->name = $request->input('name');
+        $item->entries = $request->input('entries');
+        if ($request->has('attuneDetails')) {
+            $item->reqAttune = $request->input('reqAttune') . ' ' . $request->input('attuneDetails');
+        } elseif ($request->input('reqAttune') == 0) {
+            $item->reqAttune = null;
+        } else {
+            $item->reqAttune = $request->input('reqAttune');
+        }
+
+        $item->weight = $request->input('weight');
+
+        if ($request->has('source')) {
+            $item->source_id = $request->input('source');
+        } else {
+            $item->source_id = 1;
+        }
+        $item->type_id = $request->input('type');
+        $item->rarity_id = $request->input('rarity');
+        $item->user_id = $request->user()->id;
+
+        $item->save();
+
+        // return redirect()->route('dashboard');
+        return view('items.show', ['request' => $request]);
     }
 
     /**
