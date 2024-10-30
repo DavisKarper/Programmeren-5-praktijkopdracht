@@ -12,7 +12,7 @@ Route::get('/', function () {
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 //admin routes (with middleware)
-Route::get('/admin/create/item', [DashboardController::class, 'adminCreateItem'])->middleware(['auth', 'verified'])->name('admin.create-item');
+Route::get('/admin/create/source', [DashboardController::class, 'adminCreateSource'])->middleware(['auth', 'verified'])->name('admin.create-source');
 //regular user routes (with middleware)
 
 Route::middleware('auth')->group(function () {

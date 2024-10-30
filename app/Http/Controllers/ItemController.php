@@ -7,6 +7,8 @@ use App\Models\Rarity;
 use App\Models\Source;
 use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 
 class ItemController extends Controller
@@ -71,7 +73,14 @@ class ItemController extends Controller
     {
         $rarities = Rarity::all();
         $types = Type::all();
-        return view('items.create', ['rarities' => $rarities, 'types' => $types]);
+        $sources = [];
+
+        if (Auth::user()->admin == 1) {
+            $sources = Source::all();
+        }
+
+
+        return view('items.create', ['rarities' => $rarities, 'types' => $types, 'sources' => $sources]);
     }
 
     /**
@@ -95,18 +104,28 @@ class ItemController extends Controller
 
         $item->name = $request->input('name');
         $item->entries = $request->input('entries');
+        if ($request->has('attuneDetails')) {
+            $item->reqAttune = $request->input('reqAttune') . ' ' . $request->input('attuneDetails');
+        } elseif ($request->input('reqAttune') == 0) {
+            $item->reqAttune = null;
+        } else {
+            $item->reqAttune = $request->input('reqAttune');
+        }
 
-        $item->reqAttune = $request->input('attuneDetails');
         $item->weight = $request->input('weight');
 
+        if ($request->has('source')) {
+            $item->source_id = $request->input('source');
+        } else {
+            $item->source_id = 1;
+        }
         $item->type_id = $request->input('type');
-        $item->source_id = 1;
         $item->rarity_id = $request->input('rarity');
         $item->user_id = $request->user()->id;
 
         $item->save();
 
-        return redirect()->route('items.index');
+        return redirect()->route('dashboard');
     }
 
     /**

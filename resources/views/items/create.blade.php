@@ -49,13 +49,28 @@
                 @enderror
             </div>
             <div>
+                <x-input-label for="source">Source</x-input-label>
+                <select name="source" id="source">
+                    <option value="" selected>Choose the source this item comes from</option>
+                    @foreach ($sources as $source)
+                        <option value="{{ $source['id'] }}">{{ $source['name'] }}</option>
+                    @endforeach
+                </select>
+                @error('source')
+                    <span>
+                        {{ $message }}
+                    </span>
+                @enderror
+            </div>
+            <div>
                 <x-image-input></x-image-input>
             </div>
             <div>
                 <x-input-label for="reqAttune">Attunement (leave empty if the item doesn't require
                     attunement)</x-input-label>
-                <input type="checkbox" id="reqAttune" name="reqAttune">
-                <x-text-input type="text" id="attuneDetails" name="attuneDetails"></x-text-input>
+                <input type="checkbox" id="reqAttune" name="reqAttune" value="requires attunement">
+                <x-text-input type="text" id="attuneDetails" name="attuneDetails"
+                    placeholder="by a wizard..."></x-text-input>
                 @error('reqAttune')
                     <span>
                         {{ $message }}
@@ -63,7 +78,7 @@
                 @enderror
             </div>
             <div>
-                <x-input-label for="weight">Weight (leave empty if the item doesn't have a weight)</x-input-label>
+                <x-input-label for="weight">Weight in lbs (leave empty if the item doesn't have a weight)</x-input-label>
                 <x-text-input id="weight" name="weight"></x-text-input>
                 @error('weight')
                     <span>
