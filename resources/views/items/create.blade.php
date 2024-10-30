@@ -21,15 +21,6 @@
                 @enderror
             </div>
             <div>
-                <x-input-label for="image">Image - not required</x-input-label>
-                <input type="file" id="image" name="image">
-                @error('image')
-                    <span>
-                        {{ $message }}
-                    </span>
-                @enderror
-            </div>
-            <div>
                 <x-input-label for="type">Type</x-input-label>
                 <select name="type" id="type">
                     <option value="" selected>Choose the type of item that fits best</option>
@@ -56,6 +47,9 @@
                         {{ $message }}
                     </span>
                 @enderror
+            </div>
+            <div>
+                <x-image-input></x-image-input>
             </div>
             <div>
                 <x-input-label for="reqAttune">Attunement (leave empty if the item doesn't require

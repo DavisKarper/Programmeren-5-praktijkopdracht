@@ -24,4 +24,9 @@ class Item extends Model
     {
         return $this->belongsTo(Type::class);
     }
+
+    public function tag()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }
