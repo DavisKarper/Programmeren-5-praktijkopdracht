@@ -96,7 +96,7 @@ class ItemController extends Controller
         ]);
         $item = new Item();
 
-        if ($request->has('image')) {
+        if ($request->hasFile('image')) {
             $nameOfFile = $request->file('image')->storePublicly('images', 'public');
             $item->image = $nameOfFile;
         }
@@ -164,11 +164,10 @@ class ItemController extends Controller
             'rarity' => 'required|integer',
         ]);
 
-        if ($request->has('image')) {
+        if ($request->hasFile('image')) {
             $nameOfFile = $request->file('image')->storePublicly('images', 'public');
             $item->image = $nameOfFile;
         }
-
         $item->name = $request->input('name');
         $item->entries = $request->input('entries');
         if ($request->has('attuneDetails')) {

@@ -4,6 +4,9 @@
 - logo en naam gemaakt voor website: Arcane Archive
 - image input verbeterd voor item create
 - item create bij admin veranderd in tag create zodat admin dezelfde item create gebruikt als user, maar dan met een paar extra opties
+- edit pagina toegevoegd
+- styling verbeterd van create en edit
+- fancy image veld functionaliteit werkend gekregen
 
 ### 29-10-2024
 - validatie opnieuw toegevoegd bij het maken van een item
