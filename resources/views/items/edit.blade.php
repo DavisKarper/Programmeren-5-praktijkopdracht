@@ -1,8 +1,9 @@
 <x-app-layout>
     @auth
-        <form action="{{ route('items.update', $item->id) }}" method="PUT" enctype="multipart/form-data"
+        <form action="{{ route('items.update', $item->id) }}" method="POST" enctype="multipart/form-data"
             class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md space-y-4">
             @csrf
+            @method('PUT')
             <div class="space-y-2">
                 <x-input-label for="name" class="font-semibold text-gray-700">Name</x-input-label>
                 <x-text-input id="name" name="name" value="{{ old('name', $item->name) }}"

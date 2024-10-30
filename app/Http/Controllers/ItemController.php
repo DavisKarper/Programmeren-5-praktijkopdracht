@@ -154,7 +154,7 @@ class ItemController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $item)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -162,6 +162,8 @@ class ItemController extends Controller
             'type' => 'required|integer',
             'rarity' => 'required|integer',
         ]);
+
+        $item = Item::findOrFail($id);
 
         if ($request->hasFile('image')) {
             $nameOfFile = $request->file('image')->storePublicly('images', 'public');
@@ -187,7 +189,6 @@ class ItemController extends Controller
         $item->type_id = $request->input('type');
         $item->rarity_id = $request->input('rarity');
         $item->user_id = $request->user()->id;
-
 
         $item->save();
 
