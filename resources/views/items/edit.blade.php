@@ -1,7 +1,6 @@
 <x-app-layout>
-    {{ $item }}
     @auth
-        <form action="{{ route('items.store') }}" method="POST" enctype="multipart/form-data"
+        <form action="{{ route('items.update', $item->id) }}" method="PUT" enctype="multipart/form-data"
             class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md space-y-4">
             @csrf
             <div class="space-y-2">

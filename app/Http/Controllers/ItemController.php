@@ -101,7 +101,6 @@ class ItemController extends Controller
             $item->image = $nameOfFile;
         }
 
-
         $item->name = $request->input('name');
         $item->entries = $request->input('entries');
         if ($request->has('attuneDetails')) {
@@ -155,7 +154,7 @@ class ItemController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, item $item)
+    public function update(Request $request, $item)
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -189,10 +188,10 @@ class ItemController extends Controller
         $item->rarity_id = $request->input('rarity');
         $item->user_id = $request->user()->id;
 
+
         $item->save();
 
-        // return redirect()->route('dashboard');
-        return view('items.show', ['request' => $request]);
+        return redirect()->route('dashboard');
     }
 
     /**

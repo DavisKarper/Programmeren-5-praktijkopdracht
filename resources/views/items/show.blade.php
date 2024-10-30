@@ -1,5 +1,3 @@
 <x-app-layout>
-    {{-- {{ $item }} --}}
-    {{ $request }}
-
+    {{ $item }}
 </x-app-layout>
