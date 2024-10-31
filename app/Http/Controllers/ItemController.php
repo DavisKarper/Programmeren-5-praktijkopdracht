@@ -198,6 +198,8 @@ class ItemController extends Controller
      */
     public function destroy(item $item)
     {
-        //
+        $item->delete();
+
+        return redirect()->route('dashboard');
     }
 }
