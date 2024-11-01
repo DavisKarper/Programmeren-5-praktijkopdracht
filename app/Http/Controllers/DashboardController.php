@@ -11,6 +11,7 @@ use App\Models\Item;
 use App\Models\Rarity;
 use App\Models\Source;
 use App\Models\Type;
+use App\Models\User;
 
 
 class DashboardController extends Controller
@@ -76,6 +77,18 @@ class DashboardController extends Controller
 
     public function addFavorite($id)
     {
+        if (!Auth::user()->verified) {
+            $userId = Auth::user()->id;
+            $favorites = Favorite::where('user_id', $userId)->get();
+
+            if ($favorites->count() > 3) {
+                $user = User::find($userId);
+
+                $user->verified = true;
+                $user->save();
+            }
+        }
+
         $favorite = new Favorite();
 
         $favorite->user_id = Auth::user()->id;
@@ -84,6 +97,7 @@ class DashboardController extends Controller
         $favorite->save();
         return Redirect::route('items.show', $id);
     }
+
     public function removeFavorite($id)
     {
         $userId = Auth::user()->id;

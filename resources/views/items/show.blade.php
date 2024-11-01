@@ -27,8 +27,8 @@
                 <p class="mb-4">{{ $item->entries }}</p>
 
                 <!-- Attunement -->
-                @if ($item->attunement)
-                    <p class="mb-4"><strong>Attunement:</strong> {{ $item->attunement }}</p>
+                @if ($item->reqAttune)
+                    <p class="mb-4"><strong>Attunement:</strong> {{ $item->reqAttune }}</p>
                 @endif
 
                 <!-- Weight -->
