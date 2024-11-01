@@ -2,6 +2,10 @@
 
 ### 1-11-2024
 - styling voor website aangepast
+- de tables in dashboard zijn nu toggleable
+- detailspagina is nu gestyled
+- favorite button aangemaakt op details pagina (ipv like)
+- verify item toggle gemaakt op admin dashboard
 
 ### 31-10-2024
 - delete functie toegevoegd

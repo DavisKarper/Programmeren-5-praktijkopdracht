@@ -13,6 +13,8 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['au
 
 Route::get('/admin/create/source', [DashboardController::class, 'adminCreateSource'])->middleware(['auth', 'verified'])->name('admin.create-source');
 Route::get('/admin/store/source', [DashboardController::class, 'adminStoreSource'])->middleware(['auth', 'verified'])->name('admin.store-source');
+Route::post('/items/{id}/verify', [DashboardController::class, 'verifyItem'])->middleware(['auth', 'verified'])->name('admin.verify-items');
+
 
 
 Route::middleware('auth')->group(function () {

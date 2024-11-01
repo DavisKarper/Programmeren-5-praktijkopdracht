@@ -188,6 +188,12 @@ class ItemController extends Controller
         $item->rarity_id = $request->input('rarity');
         $item->user_id = $request->user()->id;
 
+        if (Auth::user()->admin == 1) {
+            $item->verified = true;
+        } else {
+            $item->verified = false;
+        }
+
         $item->save();
 
         return redirect()->route('dashboard');

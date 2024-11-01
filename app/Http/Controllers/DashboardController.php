@@ -20,14 +20,26 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         $userid = $request->user()->id;
-        $usersItems = Item::query()->where('user_id', $userid)->get();
+        $usersItems = Item::query()->where('user_id', $userid)->orderBy('id', 'DESC')->get();
 
         if (Auth::user()->admin == 1) {
-            return view('admin.dashboard', ['usersItems' => $usersItems]);
+            $allOtherItems = Item::query()->where('user_id', '!=', $userid)->orderBy('id', 'DESC')->get();
+            return view('admin.dashboard', ['usersItems' => $usersItems, 'allOtherItems' => $allOtherItems]);
         } else {
             return view('user.dashboard', ['usersItems' => $usersItems]);
         };
     }
+
+    public function verifyItem($id)
+    {
+        $item = Item::findOrFail($id);
+        $item->verified = !$item->verified; // Toggle de verificatiestatus
+
+        $item->save();
+
+        return Redirect::route('dashboard');
+    }
+
 
     /**
      * Display a listing of the resource.
