@@ -36,12 +36,16 @@ class DashboardController extends Controller
 
     public function verifyItem($id)
     {
-        $item = Item::findOrFail($id);
-        $item->verified = !$item->verified; // Toggle de verificatiestatus
+        if (Auth::user()->admin == 1) {
+            $item = Item::findOrFail($id);
+            $item->verified = !$item->verified; // Toggle de verificatiestatus
 
-        $item->save();
+            $item->save();
 
-        return Redirect::route('dashboard');
+            return Redirect::route('dashboard');
+        } else {
+            return Redirect::route('dashboard');
+        };
     }
 
 

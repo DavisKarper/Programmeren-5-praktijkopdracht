@@ -1,13 +1,11 @@
 # Changelog
 
 ### 1-11-2024
-- styling voor website aangepast
+- styling voor website aangepast en detailspagina gestyled
 - de tables in dashboard zijn nu toggleable
-- detailspagina is nu gestyled
 - favorite button aangemaakt op details pagina (ipv like)
 - verify item toggle gemaakt op admin dashboard
 - favorite functies toegevoegd en lijst met favorites toegevoegd bij ingelogde gebruikers dashboard
-- meer items in de seeder gezet
 - verificatie voor gebruiker toegevoegd door 5 items te favoriten, waarna de gebruiker pas een item kan maken
 
 ### 31-10-2024

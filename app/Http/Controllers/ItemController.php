@@ -143,15 +143,21 @@ class ItemController extends Controller
      */
     public function edit(item $item)
     {
-        $rarities = Rarity::all();
-        $types = Type::all();
-        $sources = [];
-
-        if (Auth::user()->admin == 1) {
+        if (Auth::user()->id === $item->user->id) {
             $sources = Source::all();
-        }
 
-        return view('items.edit', ['item' => $item, 'rarities' => $rarities, 'types' => $types, 'sources' => $sources]);
+            $rarities = Rarity::all();
+            $types = Type::all();
+            $sources = [];
+
+            if (Auth::user()->admin == 1) {
+                $sources = Source::all();
+            }
+
+            return view('items.edit', ['item' => $item, 'rarities' => $rarities, 'types' => $types, 'sources' => $sources]);
+        } else {
+            return redirect()->route('dashboard');
+        }
     }
 
     /**
@@ -159,47 +165,51 @@ class ItemController extends Controller
      */
     public function update(Request $request, Item $item)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'entries' => 'required|string',
-            'type' => 'required|integer',
-            'rarity' => 'required|integer',
-        ]);
+        if (Auth::user()->id === $item->user->id) {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'entries' => 'required|string',
+                'type' => 'required|integer',
+                'rarity' => 'required|integer',
+            ]);
 
-        if ($request->hasFile('image')) {
-            $nameOfFile = $request->file('image')->storePublicly('images', 'public');
-            $item->image = $nameOfFile;
-        }
-        $item->name = $request->input('name');
-        $item->entries = $request->input('entries');
-        if ($request->has('attuneDetails')) {
-            $item->reqAttune = $request->input('reqAttune') . ' ' . $request->input('attuneDetails');
-        } elseif ($request->input('reqAttune') == 0) {
-            $item->reqAttune = null;
+            if ($request->hasFile('image')) {
+                $nameOfFile = $request->file('image')->storePublicly('images', 'public');
+                $item->image = $nameOfFile;
+            }
+            $item->name = $request->input('name');
+            $item->entries = $request->input('entries');
+            if ($request->has('attuneDetails')) {
+                $item->reqAttune = $request->input('reqAttune') . ' ' . $request->input('attuneDetails');
+            } elseif ($request->input('reqAttune') == 0) {
+                $item->reqAttune = null;
+            } else {
+                $item->reqAttune = $request->input('reqAttune');
+            }
+
+            $item->weight = $request->input('weight');
+
+            if ($request->has('source')) {
+                $item->source_id = $request->input('source');
+            } else {
+                $item->source_id = 1;
+            }
+            $item->type_id = $request->input('type');
+            $item->rarity_id = $request->input('rarity');
+            $item->user_id = $request->user()->id;
+
+            if (Auth::user()->admin == 1) {
+                $item->verified = true;
+            } else {
+                $item->verified = false;
+            }
+
+            $item->save();
+
+            return redirect()->route('dashboard');
         } else {
-            $item->reqAttune = $request->input('reqAttune');
+            return redirect()->route('dashboard');
         }
-
-        $item->weight = $request->input('weight');
-
-        if ($request->has('source')) {
-            $item->source_id = $request->input('source');
-        } else {
-            $item->source_id = 1;
-        }
-        $item->type_id = $request->input('type');
-        $item->rarity_id = $request->input('rarity');
-        $item->user_id = $request->user()->id;
-
-        if (Auth::user()->admin == 1) {
-            $item->verified = true;
-        } else {
-            $item->verified = false;
-        }
-
-        $item->save();
-
-        return redirect()->route('dashboard');
     }
 
     /**
@@ -207,8 +217,13 @@ class ItemController extends Controller
      */
     public function destroy(item $item)
     {
-        $item->delete();
+        if (Auth::user()->id === $item->user->id) {
 
-        return redirect()->route('dashboard');
+            $item->delete();
+
+            return redirect()->route('dashboard');
+        } else {
+            return redirect()->route('dashboard');
+        }
     }
 }
