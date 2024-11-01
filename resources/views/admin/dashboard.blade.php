@@ -83,7 +83,8 @@
                                                     method="POST">
                                                     @csrf
                                                     <button type="submit"
-                                                        class="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 font-semibold">
+                                                        class="px-4 py-2 rounded-lg font-semibold transition-colors duration-300
+                                                        {{ $userItem->verified ? 'bg-amber-500 hover:bg-amber-600 text-white' : 'bg-purple-500 hover:bg-purple-600 text-white' }}">
                                                         {{ $userItem->verified ? 'Unverify' : 'Verify' }}
                                                     </button>
                                                 </form>
@@ -181,7 +182,8 @@
                                                     method="POST">
                                                     @csrf
                                                     <button type="submit"
-                                                        class="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 font-semibold">
+                                                        class="px-4 py-2 rounded-lg font-semibold transition-colors duration-300
+                                                        {{ $allOtherItem->verified ? 'bg-amber-500 hover:bg-amber-600 text-white' : 'bg-purple-500 hover:bg-purple-600 text-white' }}">
                                                         {{ $allOtherItem->verified ? 'Unverify' : 'Verify' }}
                                                     </button>
                                                 </form>

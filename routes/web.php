@@ -15,7 +15,8 @@ Route::get('/admin/create/source', [DashboardController::class, 'adminCreateSour
 Route::get('/admin/store/source', [DashboardController::class, 'adminStoreSource'])->middleware(['auth', 'verified'])->name('admin.store-source');
 Route::post('/items/{id}/verify', [DashboardController::class, 'verifyItem'])->middleware(['auth', 'verified'])->name('admin.verify-items');
 
-
+Route::post('/items/{id}/favorite', [DashboardController::class, 'addFavorite'])->middleware(['auth', 'verified'])->name('user.favorite');
+Route::post('/items/{id}/unfavorite', [DashboardController::class, 'removeFavorite'])->middleware(['auth', 'verified'])->name('user.unfavorite');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

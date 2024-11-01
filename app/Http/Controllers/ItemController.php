@@ -132,6 +132,9 @@ class ItemController extends Controller
      */
     public function show(item $item)
     {
+        if (Auth::user()) {
+            $sources = Source::all();
+        }
         return view('items.show', ['item' => $item]);
     }
 

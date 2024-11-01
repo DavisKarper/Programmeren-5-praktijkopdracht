@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
+use App\Models\Favorite;
 use App\Models\Item;
 use App\Models\Rarity;
 use App\Models\Source;
@@ -26,7 +27,9 @@ class DashboardController extends Controller
             $allOtherItems = Item::query()->where('user_id', '!=', $userid)->orderBy('id', 'DESC')->get();
             return view('admin.dashboard', ['usersItems' => $usersItems, 'allOtherItems' => $allOtherItems]);
         } else {
-            return view('user.dashboard', ['usersItems' => $usersItems]);
+            $favorites = Favorite::where('user_id', $userid)->pluck('item_id'); // Haalt alleen de item_id's op
+            $favoriteItems = Item::whereIn('id', $favorites)->orderBy('id', 'DESC')->get();
+            return view('user.dashboard', ['usersItems' => $usersItems, 'favoriteItems' => $favoriteItems]);
         };
     }
 
@@ -69,5 +72,24 @@ class DashboardController extends Controller
         } else {
             return Redirect::route('dashboard');
         };
+    }
+
+    public function addFavorite($id)
+    {
+        $favorite = new Favorite();
+
+        $favorite->user_id = Auth::user()->id;
+        $favorite->item_id = $id;
+
+        $favorite->save();
+        return Redirect::route('items.show', $id);
+    }
+    public function removeFavorite($id)
+    {
+        $userId = Auth::user()->id;
+        $favorite = Favorite::where('item_id', $id)->where('user_id', $userId)->firstOrFail();
+        $favorite->delete();
+
+        return Redirect::route('items.show', $id);
     }
 }

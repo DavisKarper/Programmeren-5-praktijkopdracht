@@ -130,19 +130,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($usersItems as $userItem)
+                            @foreach ($favoriteItems as $favoriteItem)
                                 <tr class="border-b dark:border-gray-700">
                                     <td class="px-4 py-2">
                                         <img class="w-24 h-24 object-cover"
-                                            src="@if ($userItem->image === null) {{ asset('storage/' . $userItem->type->image) }} @else {{ asset('storage/' . $userItem->image) }} @endif"
-                                            alt="{{ $userItem->name }}">
+                                            src="@if ($favoriteItem->image === null) {{ asset('storage/' . $favoriteItem->type->image) }} @else {{ asset('storage/' . $favoriteItem->image) }} @endif"
+                                            alt="{{ $favoriteItem->name }}">
                                     </td>
-                                    <td class="px-4 py-2">{{ $userItem->name }}</td>
-                                    <td class="px-4 py-2">{{ $userItem->rarity->name }}</td>
-                                    <td class="px-4 py-2">{{ $userItem->type->name }}</td>
+                                    <td class="px-4 py-2">{{ $favoriteItem->name }}</td>
+                                    <td class="px-4 py-2">{{ $favoriteItem->rarity->name }}</td>
+                                    <td class="px-4 py-2">{{ $favoriteItem->type->name }}</td>
                                     <td class="px-4 py-2 h-full">
                                         <div class="flex items-center justify-center space-x-4 h-full">
-                                            <a href="{{ route('items.show', $userItem->id) }}"
+                                            <a href="{{ route('items.show', $favoriteItem->id) }}"
                                                 class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 font-semibold">Details</a>
                                         </div>
                                     </td>

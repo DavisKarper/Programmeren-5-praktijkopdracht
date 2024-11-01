@@ -6,6 +6,8 @@
 - detailspagina is nu gestyled
 - favorite button aangemaakt op details pagina (ipv like)
 - verify item toggle gemaakt op admin dashboard
+- favorite functies toegevoegd en lijst met favorites toegevoegd bij ingelogde gebruikers dashboard
+- meer items in de seeder gezet
 
 ### 31-10-2024
 - delete functie toegevoegd

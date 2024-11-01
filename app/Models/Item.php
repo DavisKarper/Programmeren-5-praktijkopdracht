@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Item extends Model
 {
@@ -24,9 +25,8 @@ class Item extends Model
     {
         return $this->belongsTo(Type::class);
     }
-
-    public function tag()
+    public function favorites()
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->hasMany(Favorite::class);
     }
 }

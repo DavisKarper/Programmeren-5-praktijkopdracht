@@ -71,11 +71,29 @@
             </div>
 
             <!-- Like Button -->
-            <div class="absolute right-4 bottom-4">
-                <button class="bg-yellow-400 text-white font-semibold py-2 px-4 rounded shadow hover:bg-yellow-500">
-                    Favorite
-                </button>
-            </div>
+            @auth
+                <div class="absolute right-4 bottom-4">
+                    @if ($item->favorites->contains('user_id', Auth::id()))
+                        <form action="{{ route('user.unfavorite', $item->id) }}" method="POST"
+                            enctype="multipart/form-data">
+                            @csrf
+                            <button type="submit"
+                                class="bg-orange-700 text-white font-semibold py-2 px-4 rounded shadow hover:bg-orange-800 transition duration-300">
+                                Unfavorite
+                            </button>
+                        </form>
+                    @else
+                        <form action="{{ route('user.favorite', $item->id) }}" method="POST"
+                            enctype="multipart/form-data">
+                            @csrf
+                            <button type="submit"
+                                class="bg-yellow-400 text-black font-semibold py-2 px-4 rounded shadow hover:bg-yellow-500 transition duration-300">
+                                Favorite
+                            </button>
+                        </form>
+                    @endif
+                </div>
+            @endauth
         </div>
     </div>
 </x-app-layout>
