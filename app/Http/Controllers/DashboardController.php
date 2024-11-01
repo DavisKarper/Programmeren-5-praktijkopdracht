@@ -32,12 +32,28 @@ class DashboardController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function adminCreateItem(Request $request)
+    public function adminCreateSource(Request $request)
     {
         if (Auth::user()->admin == 1) {
-            $rarities = Rarity::all();
-            $types = Type::all();
-            return view('admin.create-item', ['rarities' => $rarities, 'types' => $types]);
+            return view('admin.create-source');
+        } else {
+            return Redirect::route('dashboard');
+        };
+    }
+
+    public function adminStoreSource(Request $request)
+    {
+        if (Auth::user()->admin == 1) {
+            $request->validate([
+                'name' => 'required|string|max:255',
+            ]);
+            $source = new Source();
+
+            $source->name = $request->input('name');
+            $source->save();
+
+            return redirect()->route('dashboard');
+            $item = new Item();
         } else {
             return Redirect::route('dashboard');
         };

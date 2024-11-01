@@ -11,9 +11,9 @@ Route::get('/', function () {
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
-//admin routes (with middleware)
 Route::get('/admin/create/source', [DashboardController::class, 'adminCreateSource'])->middleware(['auth', 'verified'])->name('admin.create-source');
-//regular user routes (with middleware)
+Route::get('/admin/store/source', [DashboardController::class, 'adminStoreSource'])->middleware(['auth', 'verified'])->name('admin.store-source');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

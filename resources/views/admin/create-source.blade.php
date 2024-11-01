@@ -1,6 +1,6 @@
 <x-app-layout>
     @auth
-        <form action="{{ route('items.store') }}" method="POST" enctype="multipart/form-data"
+        <form action="{{ route('admin.store-source') }}" method="GET" enctype="multipart/form-data"
             class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md space-y-4">
             @csrf
             <div class="space-y-2">

@@ -1,5 +1,12 @@
 # Changelog
 
+### 1-11-2024
+- styling voor website aangepast
+
+### 31-10-2024
+- delete functie toegevoegd
+- extra validatie voor de delete functie gemaakt
+
 ### 30-10-2024
 - logo en naam gemaakt voor website: Arcane Archive
 - image input verbeterd voor item create
