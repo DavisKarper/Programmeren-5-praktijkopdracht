@@ -12,7 +12,11 @@ Route::get('/', function () {
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/admin/create/source', [DashboardController::class, 'adminCreateSource'])->middleware(['auth', 'verified'])->name('admin.create-source');
+Route::delete('/admin/destroy/source/{source}', [DashboardController::class, 'adminDestroySource'])->middleware(['auth', 'verified'])->name('admin.destroy-source');
 Route::get('/admin/store/source', [DashboardController::class, 'adminStoreSource'])->middleware(['auth', 'verified'])->name('admin.store-source');
+
+Route::delete('/admin/destroy/user/{user}', [DashboardController::class, 'adminDestroyUser'])->middleware(['auth', 'verified'])->name('admin.destroy-user');
+
 Route::post('/items/{id}/verify', [DashboardController::class, 'verifyItem'])->middleware(['auth', 'verified'])->name('admin.verify-items');
 
 Route::post('/items/{id}/favorite', [DashboardController::class, 'addFavorite'])->middleware(['auth', 'verified'])->name('user.favorite');

@@ -1,5 +1,9 @@
 # Changelog
 
+### 2-11-2024
+- admin dashboard gemaakt voor users en sources
+- admin kan nu users en sources verwijderen en beheren via die dashboards
+
 ### 1-11-2024
 - styling voor website aangepast en detailspagina gestyled
 - de tables in dashboard zijn nu toggleable

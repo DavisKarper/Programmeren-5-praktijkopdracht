@@ -50,4 +50,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Favorite::class);
     }
+    public function items()
+    {
+        return $this->hasMany(Item::class)->orderBy('id', 'DESC');
+    }
 }

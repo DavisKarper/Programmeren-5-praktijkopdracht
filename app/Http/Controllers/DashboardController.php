@@ -22,11 +22,21 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         $userid = $request->user()->id;
-        $usersItems = Item::query()->where('user_id', $userid)->orderBy('id', 'DESC')->get();
+        $usersItems = $request->user()->items;
 
         if (Auth::user()->admin == 1) {
-            $allOtherItems = Item::query()->where('user_id', '!=', $userid)->orderBy('id', 'DESC')->get();
-            return view('admin.dashboard', ['usersItems' => $usersItems, 'allOtherItems' => $allOtherItems]);
+            $section = $request->query('section');
+
+            if ($section === 'sources') {
+                $sources = Source::query()->get();
+                return view('admin.dashboard-sources', ['sources' => $sources]);
+            } elseif ($section === 'users') {
+                $users = User::query()->get();
+                return view('admin.dashboard-users', ['users' => $users]);
+            } else {
+                $allOtherItems = Item::query()->where('user_id', '!=', $userid)->orderBy('id', 'DESC')->get();
+                return view('admin.dashboard', ['usersItems' => $usersItems, 'allOtherItems' => $allOtherItems]);
+            }
         } else {
             $favorites = Favorite::where('user_id', $userid)->pluck('item_id'); // Haalt alleen de item_id's op
             $favoriteItems = Item::whereIn('id', $favorites)->orderBy('id', 'DESC')->get();
@@ -72,8 +82,31 @@ class DashboardController extends Controller
             $source->name = $request->input('name');
             $source->save();
 
-            return redirect()->route('dashboard');
-            $item = new Item();
+            return redirect()->route('dashboard', ['section' => 'sources']);
+        } else {
+            return Redirect::route('dashboard');
+        };
+    }
+
+    public function adminDestroySource(Source $source)
+    {
+        if (Auth::user()->admin == 1) {
+
+            $source->delete();
+
+            return redirect()->route('dashboard', ['section' => 'sources']);
+        } else {
+            return Redirect::route('dashboard');
+        };
+    }
+
+    public function adminDestroyUser(User $user)
+    {
+        if (Auth::user()->admin == 1) {
+
+            $user->delete();
+
+            return redirect()->route('dashboard', ['section' => 'users']);
         } else {
             return Redirect::route('dashboard');
         };

@@ -7,16 +7,21 @@ use Illuminate\View\Component;
 class DeletePopupModal extends Component
 {
     public $item;
+    public $route;
+
 
     /**
      * Create a new component instance.
      *
-     * @param int $item
+     * @param $item
+     * @param string $route
      */
-    public function __construct($item)
+    public function __construct($item, string $route = 'dashboard')
     {
         $this->item = $item;
+        $this->route = $route;
     }
+
 
     /**
      * Get the view / contents that represent the component.

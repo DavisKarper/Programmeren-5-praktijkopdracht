@@ -1,9 +1,17 @@
 <x-app-layout>
     @auth
-        <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                {{ __('Dashboard') }}
-            </h2>
+        <x-slot name="header" class="flex items-center direction-column">
+            <div class="flex space-x-8 sm:-my-px sm:ms-10">
+                <x-nav-link :href="route('dashboard', ['section' => 'items'])" :active="request()->query('section') === 'items'">
+                    {{ __('Items dashboard') }}
+                </x-nav-link>
+                <x-nav-link :href="route('dashboard', ['section' => 'sources'])" :active="request()->query('section') === 'sources'">
+                    {{ __('Sources dashboard') }}
+                </x-nav-link>
+                <x-nav-link :href="route('dashboard', ['section' => 'users'])" :active="request()->query('section') === 'users'">
+                    {{ __('Users dashboard') }}
+                </x-nav-link>
+            </div>
         </x-slot>
 
         <div class="pt-6">
@@ -20,10 +28,6 @@
                             </button>
                         </div>
                         <div class="flex gap-4">
-                            <a href="{{ route('admin.create-source') }}"
-                                class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                                Create new source
-                            </a>
                             <a href="{{ route('items.create') }}"
                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                 Create new item
@@ -88,7 +92,7 @@
                                                         {{ $userItem->verified ? 'Unverify' : 'Verify' }}
                                                     </button>
                                                 </form>
-                                                <x-delete-popup-modal :item="$userItem" />
+                                                <x-delete-popup-modal :item="$userItem" route="items.destroy" />
                                             </div>
                                         </td>
                                     </tr>

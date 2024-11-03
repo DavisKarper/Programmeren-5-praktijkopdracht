@@ -20,9 +20,9 @@ return new class extends Migration
             $table->string('reqAttune', 255)->nullable();
             $table->integer('weight')->nullable();
 
-            $table->foreignId('type_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('source_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('rarity_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('type_id')->constrained();
+            $table->foreignId('source_id')->constrained();
+            $table->foreignId('rarity_id')->constrained();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
 
             $table->timestamps();

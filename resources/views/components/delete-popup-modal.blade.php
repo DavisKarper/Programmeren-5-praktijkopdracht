@@ -13,7 +13,7 @@
                     d="M1 1l6 6m0 0l6 6M7 7l6-6M7 7l-6 6" />
             </svg>
         </button>
-        <form action="{{ route('items.destroy', $item->id) }}" method="POST" enctype="multipart/form-data"
+        <form action="{{ route($route ?? 'dashboard', $item->id) }}" method="POST" enctype="multipart/form-data"
             class="p-4 md:p-5 text-center">
             @csrf
             @method('DELETE')
